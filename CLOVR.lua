@@ -5,11 +5,6 @@
 
 -- | made by 0866 and Abacaxl
 -- | tysm unverified\\
-_G.options = {
-    viewportEnabled = true,
-    ragdollHeadMovement = true,
-    hideCharacter = false,
-}
 if not _G.options then return end
 --|| Settings:
 local StudsOffset = 0
