@@ -165,9 +165,9 @@ local features = {
             _G.options.viewportEnabled = not _G.options.viewportEnabled
             objects.textLabels["viewport"].textlabel.Text = _G.options.viewportEnabled and "Viewport: Enabled" or "Viewport: Disabled"
         end},
-        {C1 = CFrame.new(0,0.5-0.7,-0.15),text = "Toggle Hide Character",size = 2,parent = rightMenuPart,flag = "togglehidechar",textSize = 60,page = "CLOVRPage",callback = function()
+        {C1 = CFrame.new(0,0.5-0.7,-0.15),text = "Toggle Hide Character",size = 2,parent = rightMenuPart,flag = "togglehidechar",textSize = 40,page = "CLOVRPage",callback = function()
             _G.options.hideCharacter = not _G.options.hideCharacter
-            objects.textLabels["viewport"].textlabel.Text = _G.options.hideCharacter and "Viewport: Enabled" or "Viewport: Disabled"
+            objects.textLabels["hctext"].textlabel.Text = _G.options.hideCharacter and "Hide Character: Enabled" or "Hide Character: Disabled"
         end},
         {C1 = CFrame.new(0,-1.3,-0.15),text = "Back to main menu",size = 1.5,parent = middleMenuPart,flag = "back2page",textSize = 40,page = "CLOVRPage",callback = function()
             changePage("firstPage")
@@ -201,7 +201,7 @@ local features = {
         --firstPage
         {C1 = CFrame.new(0,2,-0.15),text = "Features",parent = middleMenuPart,flag = "testm",size = 3,scaled = true,textSize = 70,page = "firstPage"},
         --CLOVRPage
-        {C1 = CFrame.new(0,2,-0.15),text = "CLOVR",parent = middleMenuPart,flag = "clovr",size = 3,scaled = true,textSize = 70,page = "CLOVRPage"},
+        {C1 = CFrame.new(0,2,-0.15),text = "CLOVR",parent = middleMenuPart,flag = "clovr2",size = 3,scaled = true,textSize = 70,page = "CLOVRPage"},
         {C1 = CFrame.new(0,2,-0.15),text = "CLOVR Settings",parent = rightMenuPart,flag = "clovrsettings",size = 3,scaled = true,textSize = 50,page = "CLOVRPage"},
         {C1 = CFrame.new(0,1.05-0.7,-0.15),text = "Viewport: Disabled",parent = rightMenuPart,flag = "viewport",size = 2,scaled = true,textSize = 50,page = "CLOVRPage"},
         {C1 = CFrame.new(0,0.05-0.7,-0.15),text = "Hide Character: Disabled",parent = rightMenuPart,flag = "hctext",size = 2,scaled = true,textSize = 50,page = "CLOVRPage"},
@@ -405,7 +405,7 @@ local debounce = false
 function checkPresses()-- Detects if you are pressing the buttons on the menu
     if debounce then return end
     for i,v in next, objects.buttons do
-        if v.part.Transparency == 0 and (v.part.Position - mainHand.Position).magnitude <= 0.25 then
+        if v.part.Transparency ~= 1 and (v.part.Position - mainHand.Position).magnitude <= 0.25 then
             debounce = true
             v.part.Color = Color3.fromRGB(200,200,200)
             repeat wait()
@@ -449,12 +449,11 @@ end)
 
 updateMenuPos()
 changePage("welcomePage",true)
-wait(3)
-changePage("settingsPage")
-
-RunService.RenderStepped:connect(function()
-    scrollFrameLogs.CanvasPosition = Vector2.new(0,(#scrollFrameLogs:GetChildren()-1)*25)
-	scrollFrameLogs.CanvasSize = UDim2.new(0, 0, 0, UIListLayoutLogs.AbsoluteContentSize.Y)
+spawn(function()
+    RunService.RenderStepped:connect(function()
+        scrollFrameLogs.CanvasPosition = Vector2.new(0,(#scrollFrameLogs:GetChildren()-1)*25)
+        scrollFrameLogs.CanvasSize = UDim2.new(0, 0, 0, UIListLayoutLogs.AbsoluteContentSize.Y)
+    end)
 end)
 while RunService.RenderStepped:Wait() do
     checkPresses()
