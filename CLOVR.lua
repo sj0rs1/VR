@@ -1,4 +1,4 @@
---hastebin sometimes breaks so im putting CLOVR here.
+-- hastebin sometimes breaks so im putting CLOVR here.
 -- CLOVR - FE FULL-BODY VR SCRIPT
 
 -- April 21st Update - TOOL HOLDING ADDED
