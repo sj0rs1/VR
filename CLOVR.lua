@@ -10,11 +10,11 @@ if not _G.options then return end
 local StudsOffset = 0
 local Smoothness = .5
 local AnchorCharacter = true
-local HideCharacter = false
+local HideCharacter = _G.options.hideCharacter
 local NoCollision = true
 local ChatEnabled = true
 local ChatLocalRange = 75
-local ViewportEnabled = true
+local ViewportEnabled = _G.options.viewportEnabled
 local ViewportRange = 30
 local RagdollEnabled = true
 local RagdollHeadMovement = true
